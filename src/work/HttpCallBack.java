@@ -34,7 +34,7 @@ public class HttpCallBack {
 	 * @return 所代表远程资源的响应结果
 	 * @throws IOException
 	 */
-	public static boolean sendPost(String path, Map<String, String> params) {
+	public static String sendPost(String path, Map<String, String> params) {
 		// StringBuilder是用来组拼请求参数
 
 		PropertyConfigurator.configure("../config/log4j.properties");
@@ -95,13 +95,14 @@ public class HttpCallBack {
 				String line;
 				while ((line = in.readLine()) != null) {
 					result += line;
+					System.out.println(result);
+					
 				}
-				logger.info("Post Request Result" + result);
+				logger.info("Post Request Result测试");
 				// 以Post方式发送请求体
 
 				if (conn.getResponseCode() == 200) {
 					logger.info("Post URL Success");
-					re = true;
 				} else {
 					logger.info("Post URL false");
 				}
@@ -111,6 +112,6 @@ public class HttpCallBack {
 		} else {// 请求URL地址有误
 			logger.info("Req URL is irregular!");
 		}
-		return re;// sendPost方法返回值
+		return result;// sendPost方法返回值
 	}
 }

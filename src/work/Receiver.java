@@ -29,7 +29,7 @@ public class Receiver {
 		private static final Logger logger = LogManager.getLogger(Receiver.class);
 		private static int threadMaxnum;
 		private static AtomicInteger currentThreadnum = new AtomicInteger();
-		static boolean result = false;
+		static String result;
 		
 	public static void getConnection() {
 		// 获取配置信息
@@ -104,6 +104,7 @@ public class Receiver {
 								currentThreadnum.incrementAndGet();
 								try{
 									result = HttpCallBack.sendPost(url, map);
+									System.out.println(result);
 								}catch(Exception e){
 									logger.error(e);
 								}finally{
@@ -118,11 +119,9 @@ public class Receiver {
 									e.printStackTrace();
 								}*/
 								
-								if (result) {
-									System.out.println("POST请求成功！！!");
-								} else {
-									System.out.println("POST请求失败！！！");
-								}
+								
+								logger.info("POST请求结果为："+result);
+
 								System.out.println(new Date()+"--------一次请求结束！--------------");
 								Date dateend = new Date();
 								System.out.println("******************************************");
